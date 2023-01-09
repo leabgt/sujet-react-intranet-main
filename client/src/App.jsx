@@ -4,7 +4,7 @@ import {BrowserRouter, NavLink, Route, Router, Routes} from "react-router-dom";
 import Home from "./assets/views/Home";
 import Login from "./assets/views/LoginForm";
 import Liste from "./assets/views/Liste"
-import UserForm from './assets/views/UserForm';
+import ChangeProfil from './assets/views/ChangeProfil';
 
 function App() {
   
@@ -21,7 +21,7 @@ function App() {
           <Route path={'/'} element={<Home />} />
           <Route path={'/connexion'} element={<Login />} />
           <Route path={'/liste'} element={<Liste />} />
-          <Route path={'/profil'} element={<UserForm />} />
+          <Route path={'/profil'} element={<ChangeProfil />} />
       </Routes>
     </BrowserRouter>
   )
