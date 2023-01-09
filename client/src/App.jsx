@@ -1,10 +1,10 @@
 import './App.css'
 import {BrowserRouter, NavLink, Route, Router, Routes} from "react-router-dom";
 
-import Home from "./views/Home";
-import AddUser from "./views/AddUser";
-import LoginForm from "./views/LoginForm";
-import Liste from "./views/Liste"
+import Home from "./assets/views/Home";
+import AddUser from "./assets/views/AddUser";
+import LoginForm from "./assets/views/LoginForm";
+import Liste from "./assets/views/Liste"
 
 function App() {
   return (
