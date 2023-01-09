@@ -6,61 +6,45 @@ import { LabelForm } from "./components/LabelForm";
 
 
 export const LoginForm = () => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    async function login(credentials) {
-        return fetch('http://localhost:9000/api/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
-        })
-          .then(data => data.json())
-          .catch((error) => {
-            console.error(error);
-          });
-    }
-
+  
    const handleSubmit = async e => {
     e.preventDefault();
 
-    const response = await login({
-      email,
-      password
-    });
+    if (email && password)
+    
+      fetch('http://localhost:9000/api/login', {
+          method: 'POST',
+          headers: {
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json'},
+          body: JSON.stringify({email, password})
+        })
+        .then(res => res.json())
+        .then(
+           res => {
+         
+            const { success, token, user } = res;
 
-    if ('accessToken' in response) {
-      swal("Success", response.message, "success", {
-        buttons: false,
-        timer: 2000,
-      })
-      .then((value) => {
-        localStorage.setItem('accessToken', response['accessToken']);
-        localStorage.setItem('user', JSON.stringify(response['user']));
-        window.location.href = "/liste";
-      });
-    } else {
-        alert("Try again")
-    }
-  }
+            console.log(success);
+            console.log(token);
+            console.log(user);
 
-    // async function login(){
-    //     let item={email, password};
-    //     let result = fetch("http://localhost:9000/api/login",{
-    //         method : 'POST',
-    //         headers : { 'Content-Type': 'application/json'},
-    //         body : JSON.stringify(item)
-    //     });
+          }
+        )
+        .catch(console.log)
+        .then(window.location.href = "/liste")
 
-    //     result = await result.json();
-    //     localStorage.setItem("Login",JSON.stringify(item));
-    //     history.push('/liste');
-    //     console.log(result);
-    // }
+
+    setPassword('');
+    setEmail('');
    
       
+
+  
+  }
 
     return (
         <>
@@ -68,11 +52,14 @@ export const LoginForm = () => {
             
                 <h1>CONNEXION</h1>
                 <LabelForm >Email</LabelForm>
-                <InputForm type="email" name="email" onChange={(e) => setEmail(e.target.value)} required></InputForm>
+                <p></p>
+                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
 
                 <LabelForm name="password">Password</LabelForm>
-                <InputForm type="password" name="password" onChange={(e) => setPassword(e.target.value)} required></InputForm>
-
+                <div>
+                  <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
+                </div>
+                
                 <button type="submit">CONNEXION</button>
             </form>
         </>

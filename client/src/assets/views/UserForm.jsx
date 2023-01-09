@@ -1,7 +1,6 @@
 import { Form } from "react-router-dom";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import Form from "./forms/form"
 
 const UserForm = () => {
 
