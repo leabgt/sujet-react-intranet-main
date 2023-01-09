@@ -2,9 +2,15 @@ import './App.css'
 import {BrowserRouter, NavLink, Route, Router, Routes} from "react-router-dom";
 
 import Home from "./assets/views/Home";
+<<<<<<< HEAD
 import UserForm from "./assets/views/UserForm";
 import Login from "./assets/views/Login";
 import Liste from "./assets/views/Liste"
+=======
+import Login from "./assets/views/LoginForm";
+import Liste from "./assets/views/Liste"
+import UserForm from './assets/views/UserForm';
+>>>>>>> 3804bdd49638520c4eb5cc7b967ff70a64f0e068
 
 function App() {
   
