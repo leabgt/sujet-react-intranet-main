@@ -2,9 +2,9 @@ import './App.css'
 import {BrowserRouter, NavLink, Route, Router, Routes} from "react-router-dom";
 
 import Home from "./assets/views/Home";
-import AddUser from "./assets/views/AddUser";
 import LoginForm from "./assets/views/LoginForm";
 import Liste from "./assets/views/Liste"
+import UserForm from './assets/views/UserForm';
 
 function App() {
   return (
@@ -13,13 +13,13 @@ function App() {
           <NavLink to={'/'}>Home</NavLink>
           <NavLink to={'/connexion'}>Connexion</NavLink>
           <NavLink to={'/liste'}>Liste</NavLink>
-          <NavLink to={'/adduser'}>Ajouter</NavLink>
+          <NavLink to={'/profil'}>Ajouter</NavLink>
       </nav>
       <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/connexion'} element={<LoginForm />} />
           <Route path={'/liste'} element={<Liste />} />
-          <Route path={'/adduser'} element={<AddUser />} />
+          <Route path={'/profil'} element={<UserForm />} />
       </Routes>
     </BrowserRouter>
   )
