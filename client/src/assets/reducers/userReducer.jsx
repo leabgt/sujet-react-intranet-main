@@ -29,4 +29,4 @@ const userReducer = (state = stateInit, action = {} ) => {
     }
 }
 
-export default dragonReducer;
+export default userReducer;

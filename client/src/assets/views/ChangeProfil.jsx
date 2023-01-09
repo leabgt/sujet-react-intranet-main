@@ -1,4 +1,4 @@
-// import { UserForm } from "../components/forms/UserForm";
+import { UserForm } from "../components/forms/UserForm";
 // import { useState } from "react";
 
 const ChangeProfil = () => {
@@ -6,8 +6,8 @@ const ChangeProfil = () => {
 
     return (
         <>
-            <h1>This is UserForm</h1>
-            {/* <UserForm/> */}
+            <h1>Update Profil</h1>
+            <UserForm/>
         </>
     )
  }
