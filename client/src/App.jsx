@@ -2,8 +2,6 @@ import './App.css'
 import {BrowserRouter, NavLink, Route, Router, Routes} from "react-router-dom";
 
 import Home from "./assets/views/Home";
-<<<<<<< HEAD
-import UserForm from "./assets/views/UserForm";
 import Login from "./assets/views/Login";
 import Liste from "./assets/views/Liste"
 import ChangeProfil from './assets/views/ChangeProfil';
