@@ -8,6 +8,7 @@ const Home = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("random");
     localStorage.removeItem("status");
+    localStorage.removeItem("collaborator");
     window.location.href = "/connexion";
   };
 
@@ -15,10 +16,16 @@ const Home = () => {
     window.location.href = "/profil";
   };
 
+  const showList = () => {
+    window.location.href = "/liste"
+  }
+
+
   return (
     <>
       <h2>Bievenue sur Intranet</h2>
       <h3>Avez vous dit bonjour à : </h3>
+      <p onClick={showList}>Liste</p>
       <p onClick={logout}>Logout</p>
       <img src={user.photo} alt={user.name} onClick={profil}></img>
       

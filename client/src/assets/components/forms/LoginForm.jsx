@@ -25,14 +25,15 @@ export const LoginForm = () => {
          
             const { success, token, user } = res;
 
-            console.log(success);
-            console.log(token);
-            console.log(user);
+            // console.log(success);
+            // console.log(token);
+            // console.log(user);
 
 			localStorage.setItem('token', JSON.stringify(token));
 			localStorage.setItem('status', JSON.stringify(success))
 			localStorage.setItem('user', JSON.stringify(user));
 			random();
+			collaborateurs();
 			window.location.href = '/home'
 
           }
@@ -56,10 +57,31 @@ export const LoginForm = () => {
       .then((res) => res.json())
       .then((res) => {
         const random = res;
-        console.log(random);
+        // console.log(random);
 
         localStorage.setItem("random", JSON.stringify(random));
       });
+  }
+
+  const collaborateurs = () => {
+	let auth = JSON.parse(localStorage.getItem("token"));
+
+	fetch('http://localhost:9000/api/collaborateurs', {
+		method: 'GET',
+		headers: { 
+			Authorization: `Bearer ${auth}`,
+		},
+	})
+	.then(res => res.json()
+	.then(res => {
+		const collaborator = res;
+
+		console.log(collaborator);
+
+		localStorage.setItem("collaborator", JSON.stringify(collaborator))
+
+
+	}))
   }
 
     return (
