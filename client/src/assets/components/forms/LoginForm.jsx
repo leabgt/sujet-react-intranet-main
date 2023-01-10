@@ -4,18 +4,15 @@ import { InputForm } from "./components/InputForm";
 import { LabelForm } from "./components/LabelForm";
 
 
-
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
   
-   const handleSubmit = async e => {
-    e.preventDefault();
-
-    if (email && password)
+  const handleSubmit = async e => {
+	e.preventDefault();
     
-      fetch('http://localhost:9000/api/login', {
+    fetch('http://localhost:9000/api/login', {
           method: 'POST',
           headers: {
             'Accept' : 'application/json',
@@ -32,18 +29,37 @@ export const LoginForm = () => {
             console.log(token);
             console.log(user);
 
+			localStorage.setItem('token', JSON.stringify(token));
+			localStorage.setItem('status', JSON.stringify(success))
+			localStorage.setItem('user', JSON.stringify(user));
+			random();
+			window.location.href = '/home'
+
           }
         )
         .catch(console.log)
-        .then(window.location.href = "/liste")
-
-
+      
     setPassword('');
     setEmail('');
-   
-      
 
-  
+  }
+
+  const random = () => {
+    let auth = JSON.parse(localStorage.getItem("token"));
+
+    fetch("http://localhost:9000/api/collaborateurs/random", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${auth}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const random = res;
+        console.log(random);
+
+        localStorage.setItem("random", JSON.stringify(random));
+      });
   }
 
     return (
@@ -52,8 +68,9 @@ export const LoginForm = () => {
             
                 <h1>CONNEXION</h1>
                 <LabelForm >Email</LabelForm>
-                <p></p>
-                <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
+                <div>
+                  <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
+                </div>
 
                 <LabelForm name="password">Password</LabelForm>
                 <div>
