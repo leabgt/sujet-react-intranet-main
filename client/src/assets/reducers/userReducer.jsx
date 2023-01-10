@@ -17,7 +17,7 @@ const userReducer = (state = stateInit, action = {} ) => {
             const { userToDelete } = action.payload;
             return {
                 ...state,
-                users: state.users.filter( user => user.id !== userToDelete.id )
+                // users: state.users.filter( user => user.id !== userToDelete.id )
             }
         case 'REVERSE_USER':
             return {

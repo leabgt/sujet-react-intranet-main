@@ -1,9 +1,18 @@
+// import PropTypes from "prop-types";
+
 export const SelectForm = (props) => {
     return (
         <>
-            <select name={props.name} id={props.id}>
-                {props.children}
+            <select onChange={props.handleChange}>
+                {props.options.map((e, i) => {
+                    return  <option key={i} value={e}>{e}</option>
+                })}
             </select>
         </>
     )
 }
+
+// SelectForm.propTypes = {
+//     handleChange: PropTypes.func.isRequired,
+//     options: PropTypes.array.isRequired
+// }

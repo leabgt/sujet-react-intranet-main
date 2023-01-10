@@ -6,13 +6,15 @@ import {addUser} from "../../actions/userActions";
 import {Form} from './form'
 import { LabelForm } from "./components/LabelForm";
 import { InputForm } from "./components/InputForm";
+import { SelectForm } from "./components/SelectForm";
+
 
 export const UserForm = () => {
 
     const dispatch = useDispatch();
 
-    const [ userGender, setUserGender ] = useState([]);
-    const [ userCategory, setUserCategory ] = useState([]);
+    const [ userGender, setUserGender ] = useState(['Homme', 'Femme']);
+    const [ userCategory, setUserCategory ] = useState(['Marketing', 'Techinque', 'Client']);
     const [ userName, setUserName ] = useState('');
     const [ userFirstName, setUserFirstName ] = useState('');
     const [ userEmail, setUserEmail ] = useState('');
@@ -42,8 +44,8 @@ export const UserForm = () => {
         }))
         ;
 
-        setUserGender(['Homme', 'Femme']); 
-        setUserGender(['Marketing', 'Techinque']); 
+        setUserGender([]); 
+        setUserCategory([]); 
         setUserName('');
         setUserFirstName(''); 
         setUserEmail(''); 
@@ -52,16 +54,35 @@ export const UserForm = () => {
         setUserBirthDate(''); 
         setUserCity('');  
         setUserCountry(''); 
-        setUserCountry('');
         setUserPictureURL('');  
-        setUserCategory(''); 
     }
 
     return (
         <>  
             <Form onSubmit={handleAddUser}>
-                <LabelForm>Email</LabelForm>
+                <LabelForm text="Civilité"></LabelForm>
+                <SelectForm onChange={(e) => setUserGender(e.target.value)} options={userGender}></SelectForm>
+                <LabelForm text="Categorie"></LabelForm>
+                <SelectForm onChange={(e) => setUserCategory(e.target.value)} options={userCategory}></SelectForm>
+                <LabelForm text="Nom"></LabelForm>
+                <InputForm name="name" onChange={(e) => setUserName(e.target.value)}></InputForm>
+                <LabelForm text="Prénom"></LabelForm>
+                <InputForm name="firstname" onChange={(e) => setUserFirstName(e.target.value)}></InputForm>
+                <LabelForm text="Email"></LabelForm>
                 <InputForm type="email" name="email" onChange={(e) => setUserEmail(e.target.value)}></InputForm>
+                <LabelForm text="Mot de passe"></LabelForm>
+                <InputForm type="password" name="password" onChange={(e) => setUserPassword(e.target.value)}></InputForm>
+                <LabelForm text="Numéro de téléphone"></LabelForm>
+                <InputForm name="phonenumber" onChange={(e) => setUserPhoneNumber(e.target.value)}></InputForm>
+                <LabelForm text="Date de naissance"></LabelForm>
+                <InputForm name="birthdate" onChange={(e) => setUserBirthDate(e.target.value)}></InputForm>
+                <LabelForm text="Ville"></LabelForm>
+                <InputForm name="password" onChange={(e) => setUserCity(e.target.value)}></InputForm>
+                <LabelForm text="Pays"></LabelForm>
+                <InputForm name="country" onChange={(e) => setUserCountry(e.target.value)}></InputForm>
+                <LabelForm text="URL de la photo"></LabelForm>
+                <InputForm name="pictureURL" onChange={(e) => setUserPictureURL(e.target.value)}></InputForm>
+                <InputForm type="submit" value="Ajouter"/>
             </Form>
         </>
     )
