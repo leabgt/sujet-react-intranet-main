@@ -3,7 +3,7 @@
 export const SelectForm = (props) => {
     return (
         <>
-            <select onChange={props.handleChange}>
+            <select onChange={props.handleChange} defaultValue={props.defaultValue}>
                 {props.options.map((e, i) => {
                     return  <option key={i} value={e}>{e}</option>
                 })}

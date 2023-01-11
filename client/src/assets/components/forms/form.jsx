@@ -8,6 +8,7 @@ export const Form = (props) => {
         <>
             <form>
                 {props.children}
+                <input type="submit" value={props.value}/>
             </form>
         </>
     )

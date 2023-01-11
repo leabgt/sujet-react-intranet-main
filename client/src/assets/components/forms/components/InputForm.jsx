@@ -3,7 +3,7 @@ export const InputForm = (props) => {
         <>
             <div>
                 <label htmlFor={props.for}>{props.text}</label>
-                <input name={props.name} type={props.type} placeholder={props.placeholder} id={props.id} size={props.size} value={props.value}/>
+                <input name={props.name} type={props.type} placeholder={props.placeholder} id={props.id} size={props.size} defaultValue={props.defaultValue} value={props.value}/>
             </div>
         </>
     )

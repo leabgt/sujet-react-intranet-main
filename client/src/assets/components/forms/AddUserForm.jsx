@@ -9,9 +9,7 @@ import { InputForm } from "./components/InputForm";
 import { SelectForm } from "./components/SelectForm";
 
 
-export const UserForm = () => {
-
-    const user = JSON.parse(localStorage.getItem("user"));
+export const AddUserForm = () => {
     
     const dispatch = useDispatch();
 
@@ -61,31 +59,30 @@ export const UserForm = () => {
 
     return (
         <>  
-            <Form onSubmit={handleAddUser} value="Modifier">
+            <Form onSubmit={handleAddUser} value="Ajouter">
                 <LabelForm text="Civilité"></LabelForm>
-                <SelectForm onChange={(e) => setUserGender(e.target.value)} options={userGender} defaultValue={user.gender}></SelectForm>
+                <SelectForm onChange={(e) => setUserGender(e.target.value)} options={userGender}></SelectForm>
                 <LabelForm text="Categorie"></LabelForm>
-                <SelectForm onChange={(e) => setUserCategory(e.target.value)} options={userCategory} defaultValue={user.service}></SelectForm>
+                <SelectForm onChange={(e) => setUserCategory(e.target.value)} options={userCategory}></SelectForm>
                 <LabelForm text="Nom"></LabelForm>
-                <InputForm name="name" onChange={(e) => setUserName(e.target.value)} defaultValue={user.lastname}></InputForm>
+                <InputForm name="name" onChange={(e) => setUserName(e.target.value)}></InputForm>
                 <LabelForm text="Prénom"></LabelForm>
-                <InputForm name="firstname" onChange={(e) => setUserFirstName(e.target.value)} defaultValue={user.firstname}></InputForm>
+                <InputForm name="firstname" onChange={(e) => setUserFirstName(e.target.value)}></InputForm>
                 <LabelForm text="Email"></LabelForm>
-                <InputForm type="email" name="email" onChange={(e) => setUserEmail(e.target.value)} defaultValue={user.email}></InputForm>
+                <InputForm type="email" name="email" onChange={(e) => setUserEmail(e.target.value)}></InputForm>
                 <LabelForm text="Mot de passe"></LabelForm>
                 <InputForm type="password" name="password" onChange={(e) => setUserPassword(e.target.value)}></InputForm>
                 <LabelForm text="Numéro de téléphone"></LabelForm>
-                <InputForm name="phonenumber" onChange={(e) => setUserPhoneNumber(e.target.value)} defaultValue={user.phone}></InputForm>
+                <InputForm name="phonenumber" onChange={(e) => setUserPhoneNumber(e.target.value)}></InputForm>
                 <LabelForm text="Date de naissance"></LabelForm>
-                <InputForm name="birthdate" onChange={(e) => setUserBirthDate(e.target.value)} defaultValue={user.birthdate}></InputForm>
+                <InputForm name="birthdate" onChange={(e) => setUserBirthDate(e.target.value)}></InputForm>
                 <LabelForm text="Ville"></LabelForm>
-                <InputForm name="password" onChange={(e) => setUserCity(e.target.value)} defaultValue={user.city}></InputForm>
+                <InputForm name="password" onChange={(e) => setUserCity(e.target.value)}></InputForm>
                 <LabelForm text="Pays"></LabelForm>
-                <InputForm name="country" onChange={(e) => setUserCountry(e.target.value)} defaultValue={user.country}></InputForm>
+                <InputForm name="country" onChange={(e) => setUserCountry(e.target.value)}></InputForm>
                 <LabelForm text="URL de la photo"></LabelForm>
-                <InputForm name="pictureURL" onChange={(e) => setUserPictureURL(e.target.value)} defaultValue={user.photo}></InputForm>
+                <InputForm name="pictureURL" onChange={(e) => setUserPictureURL(e.target.value)}></InputForm>
             </Form>
         </>
     )
  }
- 

@@ -1,4 +1,5 @@
 import { UserForm } from "../components/forms/UserForm";
+import { withAuth } from "../components/auth/WithAuth";
 // import { useState } from "react";
 
 const ChangeProfil = () => {
@@ -6,10 +7,11 @@ const ChangeProfil = () => {
 
     return (
         <>
-            <h1>Update Profil</h1>
+            <h1>Modifier mon profil</h1>
             <UserForm/>
         </>
     )
  }
  
- export default ChangeProfil;
+ export default withAuth(ChangeProfil);
+//  export default ChangeProfil;
