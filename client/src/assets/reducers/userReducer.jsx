@@ -1,13 +1,15 @@
+const collaborator = JSON.parse(localStorage.getItem("collaborator"));
+
 const stateInit = {
-    users: []
+    users: collaborator
 }
 
 const userReducer = (state = stateInit, action = {} ) => {
     switch( action.type )
     {
         case 'ADD_USER':
-            const { user } = action.payload;
-            const updatedUers = [...state.users];
+            const user = action.payload;
+            const updatedUsers = [...state.users];
             updatedUsers.push( user );
             return {
                 ...state,
