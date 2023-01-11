@@ -4,24 +4,90 @@ import { useState } from "react";
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
 
+
 const Liste = () => {
   const token = Storage.get("token");
 
-  const [collaborator, setCollaborator] = useState(null);
+  const [collaborator, setCollaborator] = useState([]);
+  const [serviceList, setServiceList] = useState([]);
+  const [category, setCategory] = useState();
+  const [q, setQ] = useState("");
+
 
   useEffect(() => {
     API.getCollaborateurs(token).then((list) => {
       setCollaborator(list);
+
     });
+
+
   }, []);
+
+  function getFilteredList() {
+    if (!category) {
+      return collaborator;
+    } else if (category) {
+      return collaborator.filter((data) => data.service === category);
+    }
+    
+    if (!q){
+      return collaborator
+    }
+    if(q){
+      console.log("enter q");
+
+      return collaborator.filter((data) => (
+        data.firstname
+          .toLowerCase()
+          .includes(q.toLowerCase()) === q.toLowerCase() 
+        ||
+        data.lastname
+          .toLowerCase()
+          .includes(q.toLowerCase()) === q.toLowerCase() ))
+      
+    }
+
+    //add other search
+  }
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    if (e.target.value == "All") {
+      setCategory(undefined);
+    }
+  };
+
+  const handleQueryChange = (e) => {
+    setQ(e.target.value);
+    console.log(q);
+  };
+
+  const filteredList = getFilteredList();
 
   return (
     <>
       <h2>Liste des collaborateurs</h2>
-
+      <div>
+        <div>Filter by Category:</div>
+        <div>
+          <input
+            type="text"
+            name="q"
+            onChange={handleQueryChange}
+          ></input>
+        </div>
+        <div>
+          <select name="category-list" onChange={handleCategoryChange}>
+            <option value="All">All</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Technique">Technique</option>
+            <option value="Client">Client</option>
+          </select>
+        </div>
+      </div>
       {collaborator && (
         <div>
-          {collaborator.map(function (data, keys) {
+          {filteredList.map(function (data, keys) {
             return (
               <div key={keys}>
                 <img src={data.photo} alt={data.firstname}></img>
@@ -46,3 +112,4 @@ const Liste = () => {
 };
 
 export default Liste;
+
