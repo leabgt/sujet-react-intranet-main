@@ -74,6 +74,19 @@ export async function addCollaborator(
     .catch(handleError);
 }
 
+export async function deleteCollaborator(token, id) {
+  fetch(`${API_ENDPOINT}/api/collaborateurs/${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch(handleError);
+}
+
 function handleError(err) {
   console.error("[ERREUR API]", err.message);
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
 
-
 const Liste = () => {
   const token = Storage.get("token");
 
@@ -12,31 +11,22 @@ const Liste = () => {
   const [category, setCategory] = useState();
   const [q, setQ] = useState();
 
-
   useEffect(() => {
     API.getCollaborateurs(token).then((list) => {
       setCollaborator(list);
-
     });
-
-
   }, []);
 
   function getFilteredList() {
     if (!category && !q) {
       return collaborator;
-    }  
-    return (
-      collaborator
-      .filter((data) => (category === undefined || data.service === category))
-      .filter((data) => (
-        data.firstname
-          .toLowerCase()
-          .includes(q.toLowerCase())
-        ||
-        data.lastname
-          .toLowerCase()
-          .includes(q.toLowerCase())))
+    }
+    return collaborator
+      .filter((data) => category === undefined || data.service === category)
+      .filter(
+        (data) =>
+          data.firstname.toLowerCase().includes(q.toLowerCase()) ||
+          data.lastname.toLowerCase().includes(q.toLowerCase())
       );
   }
 
@@ -50,6 +40,14 @@ const Liste = () => {
   const handleQueryChange = (e) => {
     setQ(e.target.value);
     console.log(q);
+  };
+
+  const handleDeleteUser = (e, id) => {
+    e.preventDefault();
+
+    API.deleteCollaborator(token, id).then((data) => {
+      window.location.href = "/liste";
+    });
   };
 
   const filteredList = getFilteredList();
@@ -92,6 +90,9 @@ const Liste = () => {
                 <p>{data.email}</p>
                 <p>{data.phone}</p>
                 <p>Anniversaire {data.birthdate}</p>
+                <button onClick={(e) => handleDeleteUser(e, data.id)}>
+                  Supprimer
+                </button>
               </div>
             );
           })}
@@ -102,4 +103,3 @@ const Liste = () => {
 };
 
 export default Liste;
-
