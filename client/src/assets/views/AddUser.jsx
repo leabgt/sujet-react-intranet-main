@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import * as API from "../services/apiService";
+import * as Storage from "../services/storageService";
+
 import { addUser } from "../actions/userActions";
 
 import { withAdmin } from "../components/auth/WithAdmin";
@@ -8,13 +11,16 @@ import { Form } from "../components/forms/form";
 import { LabelForm } from "../components/forms/LabelForm";
 import { InputForm } from "../components/forms/InputForm";
 import { SelectForm } from "../components/forms/SelectForm";
+import { Navigate } from "react-router-dom";
 
 function AddUser() {
-  // const dispatch = useDispatch();
+  const token = Storage.get("token");
 
-  // const [ userID, setUserID ] = useState();
-  const [gender, setGender] = useState(["male", "female"]);
-  const [service, setService] = useState(["Marketing", "Technique", "Client"]);
+  const genderoptions = ["", "male", "female"];
+  const serviceoptions = ["", "Marketing", "Technique", "Client"];
+
+  const [gender, setGender] = useState("");
+  const [service, setService] = useState("");
   const [lastname, setLastName] = useState("");
   const [firstname, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,51 +34,22 @@ function AddUser() {
   const handleAddUser = (e) => {
     e.preventDefault();
 
-    let api = "http://localhost:9000/api/collaborateurs";
-    let auth = JSON.parse(localStorage.getItem("token"));
-    console.log(auth);
-
-    fetch(api, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth}`,
-      },
-      body: JSON.stringify({
-        gender,
-        firstname,
-        lastname,
-        password,
-        email,
-        phone,
-        birthdate,
-        city,
-        country,
-        photo,
-        service,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const token = res;
-        console.log(token);
-        console.log(res);
-      })
-      .catch(console.log("err"));
-
-    //     setUserID(userID + 1);
-    //     setUserGender([]);
-    //     setUserCategory([]);
-    //     setUserName('');
-    //     setUserFirstName('');
-    //     setUserEmail('');
-    //     setUserPassword('');
-    //     setUserPhoneNumber('');
-    //     setUserBirthDate('');
-    //     setUserCity('');
-    //     setUserCountry('');
-    //     setUserPictureURL('');
+    API.addCollaborator(
+      token,
+      gender,
+      firstname,
+      lastname,
+      password,
+      email,
+      phone,
+      birthdate,
+      city,
+      country,
+      photo,
+      service
+    ).then((data) => {
+      window.location.href = "/liste";
+    });
   };
 
   return (
@@ -82,12 +59,12 @@ function AddUser() {
         <LabelForm text="Civilité"></LabelForm>
         <SelectForm
           onChange={(e) => setGender(e.target.value)}
-          options={gender}
+          options={genderoptions}
         ></SelectForm>
         <LabelForm text="Categorie"></LabelForm>
         <SelectForm
           onChange={(e) => setService(e.target.value)}
-          options={service}
+          options={serviceoptions}
         ></SelectForm>
         <LabelForm text="Nom"></LabelForm>
         <InputForm
@@ -149,3 +126,4 @@ function AddUser() {
 }
 
 export default withAdmin(AddUser);
+// export default AddUser;

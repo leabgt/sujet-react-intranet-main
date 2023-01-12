@@ -35,6 +35,45 @@ export async function getCollaborateurs(token) {
     .catch(handleError);
 }
 
+export async function addCollaborator(
+  token,
+  gender,
+  firstname,
+  lastname,
+  password,
+  email,
+  phone,
+  birthdate,
+  city,
+  country,
+  photo,
+  service
+) {
+  fetch(`${API_ENDPOINT}/api/collaborateurs`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      gender,
+      firstname,
+      lastname,
+      password,
+      email,
+      phone,
+      birthdate,
+      city,
+      country,
+      photo,
+      service,
+    }),
+  })
+    .then((res) => res.json())
+    .catch(handleError);
+}
+
 function handleError(err) {
   console.error("[ERREUR API]", err.message);
 }
