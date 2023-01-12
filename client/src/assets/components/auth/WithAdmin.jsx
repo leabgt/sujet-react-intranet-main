@@ -1,15 +1,16 @@
 import Home from "../../views/Home";
+import * as Storage from "../../services/storageService";
 
 export const withAdmin = (Component) => {
-    const AuthAdminRoute = () => {
-        let isAuth = JSON.parse(localStorage.getItem("token"));
-        let isAdmin = JSON.parse(localStorage.getItem("user")).isAdmin;
-      if (isAdmin && isAuth) {
-        return <Component />;
-      } else {
-        return <Home />;
-      }
-    };
-  
-    return AuthAdminRoute;
+  const AuthAdminRoute = () => {
+    let isAuth = Storage.get("token");
+    let isAdmin = Storage.getJSON("user").isAdmin;
+    if (isAdmin && isAuth) {
+      return <Component />;
+    } else {
+      return <Home />;
+    }
   };
+
+  return AuthAdminRoute;
+};
