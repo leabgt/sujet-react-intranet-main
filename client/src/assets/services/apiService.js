@@ -87,6 +87,46 @@ export async function deleteCollaborator(token, id) {
     .catch(handleError);
 }
 
+export async function updateUser(
+  token, 
+  id, 
+  gender,
+  firstname,
+  lastname,
+  password,
+  email,
+  phone,
+  birthdate,
+  city,
+  country,
+  photo,
+  service){
+  
+  fetch(`${API_ENDPOINT}/api/collaborateurs/${id}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token} | ${id}`,
+    },
+    body: JSON.stringify({
+      gender,
+      firstname,
+      lastname,
+      password,
+      email,
+      phone,
+      birthdate,
+      city,
+      country,
+      photo,
+      service,
+    }),
+  })
+    .then((res) => res.json())
+    .catch(handleError);  
+}
+
 function handleError(err) {
   console.error("[ERREUR API]", err.message);
 }

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
   const user = Storage.getJSON("user");
@@ -27,7 +28,9 @@ const Home = () => {
   };
 
   const profil = () => {
-    window.location.href = "/profil";
+    console.log(user.id);
+    let val = user.id;
+    window.location.href = `/profil/`+val;
   };
 
 

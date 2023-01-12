@@ -1,28 +1,31 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { addUser } from "../actions/userActions";
+import * as API from "../services/apiService";
+import * as Storage from "../services/storageService";
 
 import { withAuth } from "../components/auth/WithAuth";
 import { Form } from "../components/forms/form";
 import { LabelForm } from "../components/forms/LabelForm";
 import { InputForm } from "../components/forms/InputForm";
 import { SelectForm } from "../components/forms/SelectForm";
+import { useEffect } from "react";
 
 // import { useState } from "react";
 
 const ChangeProfil = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = Storage.getJSON("user")
+  const token = Storage.get("token");
+  const id = user.id;
 
   const dispatch = useDispatch();
 
-  const [userGender, setUserGender] = useState(["male", "female"]);
-  const [userCategory, setUserCategory] = useState([
-    "Marketing",
-    "Technique",
-    "Client",
-  ]);
-  const [userName, setUserName] = useState("");
+  const genderoptions = ["male", "female"];
+  const serviceoptions = ["Marketing", "Technique", "Client"];
+
+  const [userGender, setUserGender] = useState("");
+  const [userCategory, setUserCategory] = useState("");
+  const [userName, setUserName] = useState();
   const [userFirstName, setUserFirstName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -32,57 +35,73 @@ const ChangeProfil = () => {
   const [userCountry, setUserCountry] = useState("");
   const [userPictureURL, setUserPictureURL] = useState("");
 
-  const handleAddUser = (e) => {
-    e.preventDefault();
-    dispatch(
-      addUser({
-        user: {
-          gender: userGender,
-          category: userCategory,
-          name: userName,
-          firstname: userFirstName,
-          email: userEmail,
-          password: userPassword,
-          phonenumber: userPhoneNumber,
-          birthdate: userBirthDate,
-          city: userCity,
-          country: userCountry,
-          pictureURL: userPictureURL,
-        },
-      })
-    );
 
-    setUserGender("");
-    setUserCategory("");
-    setUserName("");
-    setUserFirstName("");
-    setUserEmail("");
-    setUserPassword("");
-    setUserPhoneNumber("");
-    setUserBirthDate("");
-    setUserCity("");
-    setUserCountry("");
-    setUserPictureURL("");
+  useEffect(() =>{
+    setUserGender(user.gender);
+    setUserCategory(user.service);
+    setUserName(user.lastname);
+    setUserFirstName(user.firstname);
+    setUserEmail(user.email);
+    setUserPassword(user.password);
+    setUserPhoneNumber(user.phone);
+    setUserBirthDate(user.birthdate);
+    setUserCity(user.city);
+    setUserCountry(user.country);
+    setUserPictureURL(user.photo);
+  }, [])
+
+  const handleModifyUser = (e , id) => {
+    e.preventDefault();
+
+    API.updateUser(
+      token,
+      id, 
+      userGender, 
+      userFirstName, 
+      userName,
+      userPassword, 
+      userEmail, 
+      userPhoneNumber,
+      userBirthDate, 
+      userCity, 
+      userCountry, 
+      userPictureURL,
+      userCategory )
+      .then((data) => {console.log(data);})
+
+    console.log(
+      "Enter modify",
+      userGender,
+      userCategory,
+      userFirstName,
+      userName,
+      userEmail,
+      userPhoneNumber,
+      userBirthDate,
+      userCity,
+      userCountry,
+      userPictureURL
+      );
   };
 
   return (
     <>
-      <h1>Modifier mon profil</h1>;
-      <Form onSubmit={handleAddUser} value="Modifier">
-        <LabelForm text="Civilité"></LabelForm>
+      <h1>Modifier mon profil</h1>
+      <Form onSubmit={(e) => handleModifyUser(e, id)} value="Modifier">
         <SelectForm
           onChange={(e) => setUserGender(e.target.value)}
-          options={userGender}
           defaultValue={user.gender}
+          options={genderoptions}
         ></SelectForm>
         <LabelForm text="Categorie"></LabelForm>
         <SelectForm
           onChange={(e) => setUserCategory(e.target.value)}
-          options={userCategory}
           defaultValue={user.service}
+          options={serviceoptions}
         ></SelectForm>
         <LabelForm text="Nom"></LabelForm>
         <InputForm
+          type="text"
           name="name"
           onChange={(e) => setUserName(e.target.value)}
           defaultValue={user.lastname}
@@ -91,7 +110,7 @@ const ChangeProfil = () => {
         <InputForm
           name="firstname"
           onChange={(e) => setUserFirstName(e.target.value)}
-          defaultValue={user.firstname}
+         defaultValue={user.firstname}
         ></InputForm>
         <LabelForm text="Email"></LabelForm>
         <InputForm
@@ -141,5 +160,6 @@ const ChangeProfil = () => {
   );
 };
 
-export default withAuth(ChangeProfil);
-//  export default ChangeProfil;
+//export default withAuth(ChangeProfil);
+export default ChangeProfil;
+
