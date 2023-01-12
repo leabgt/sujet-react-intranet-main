@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import { useState } from "react";
 
 import * as Storage from "../services/storageService";
@@ -6,6 +6,7 @@ import * as API from "../services/apiService";
 
 const Liste = () => {
   const token = Storage.get("token");
+  const user = Storage.getJSON("user");
 
   const [collaborator, setCollaborator] = useState([]);
   const [category, setCategory] = useState();
@@ -90,9 +91,11 @@ const Liste = () => {
                 <p>{data.email}</p>
                 <p>{data.phone}</p>
                 <p>Anniversaire {data.birthdate}</p>
-                <button onClick={(e) => handleDeleteUser(e, data.id)}>
-                  Supprimer
-                </button>
+                {user.isAdmin && (
+                  <button onClick={(e) => handleDeleteUser(e, data.id)}>
+                    Supprimer
+                  </button>
+                )}
               </div>
             );
           })}
