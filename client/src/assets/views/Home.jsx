@@ -30,13 +30,9 @@ const Home = () => {
     window.location.href = "/profil";
   };
 
-  const showList = () => {
-    window.location.href = "/liste";
-  };
 
   return (
     <>
-      <p onClick={showList}>Liste</p>
       <p onClick={logout}>Logout</p>
 
       <h2>Bienvenue {user.firstname} sur Intranet</h2>

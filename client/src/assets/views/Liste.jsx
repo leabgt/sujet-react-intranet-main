@@ -9,9 +9,8 @@ const Liste = () => {
   const token = Storage.get("token");
 
   const [collaborator, setCollaborator] = useState([]);
-  const [serviceList, setServiceList] = useState([]);
   const [category, setCategory] = useState();
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState();
 
 
   useEffect(() => {
@@ -24,30 +23,21 @@ const Liste = () => {
   }, []);
 
   function getFilteredList() {
-    if (!category) {
+    if (!category && !q) {
       return collaborator;
-    } else if (category) {
-      return collaborator.filter((data) => data.service === category);
-    }
-    
-    if (!q){
-      return collaborator
-    }
-    if(q){
-      console.log("enter q");
-
-      return collaborator.filter((data) => (
+    }  
+    return (
+      collaborator
+      .filter((data) => (category === undefined || data.service === category))
+      .filter((data) => (
         data.firstname
           .toLowerCase()
-          .includes(q.toLowerCase()) === q.toLowerCase() 
+          .includes(q.toLowerCase())
         ||
         data.lastname
           .toLowerCase()
-          .includes(q.toLowerCase()) === q.toLowerCase() ))
-      
-    }
-
-    //add other search
+          .includes(q.toLowerCase())))
+      );
   }
 
   const handleCategoryChange = (e) => {
@@ -71,8 +61,8 @@ const Liste = () => {
         <div>Filter by Category:</div>
         <div>
           <input
-            type="text"
-            name="q"
+            type="search"
+            name="search-bar"
             onChange={handleQueryChange}
           ></input>
         </div>
