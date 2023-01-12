@@ -1,17 +1,13 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 import * as API from "../services/apiService";
 import * as Storage from "../services/storageService";
-
-import { addUser } from "../actions/userActions";
 
 import { withAdmin } from "../components/auth/WithAdmin";
 import { Form } from "../components/forms/form";
 import { LabelForm } from "../components/forms/LabelForm";
 import { InputForm } from "../components/forms/InputForm";
 import { SelectForm } from "../components/forms/SelectForm";
-import { Navigate } from "react-router-dom";
 
 function AddUser() {
   const token = Storage.get("token");
@@ -56,65 +52,73 @@ function AddUser() {
     <>
       <h1>Ajouter un utilisateur</h1>
       <Form onSubmit={(e) => handleAddUser(e)} value="Ajouter">
-        <LabelForm text="Civilité"></LabelForm>
+        <LabelForm text="* Civilité :"></LabelForm>
         <SelectForm
           onChange={(e) => setGender(e.target.value)}
           options={genderoptions}
         ></SelectForm>
-        <LabelForm text="Categorie"></LabelForm>
+        <LabelForm text="* Categorie :"></LabelForm>
         <SelectForm
           onChange={(e) => setService(e.target.value)}
           options={serviceoptions}
         ></SelectForm>
-        <LabelForm text="Nom"></LabelForm>
+        <LabelForm text="* Nom :"></LabelForm>
         <InputForm
           type="text"
           name="name"
           onChange={(e) => setLastName(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Prénom"></LabelForm>
+        <LabelForm text="* Prénom :"></LabelForm>
         <InputForm
           type="text"
           name="firstname"
           onChange={(e) => setFirstName(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Email"></LabelForm>
+        <LabelForm text="* Email :"></LabelForm>
         <InputForm
           type="email"
           name="email"
           onChange={(e) => setEmail(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Mot de passe"></LabelForm>
+        <LabelForm text="* Mot de passe :"></LabelForm>
         <InputForm
           type="password"
           name="password"
           onChange={(e) => setPassword(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Numéro de téléphone"></LabelForm>
+        <LabelForm text="* Téléphone :"></LabelForm>
         <InputForm
           type="tel"
           name="phonenumber"
           onChange={(e) => setPhone(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Date de naissance"></LabelForm>
+        <LabelForm text="* Date de naissance :"></LabelForm>
         <InputForm
           type="text"
           name="birthdate"
           onChange={(e) => setBirthDate(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Ville"></LabelForm>
+        <LabelForm text="* Ville :"></LabelForm>
         <InputForm
           type="text"
           name="city"
           onChange={(e) => setCity(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="Pays"></LabelForm>
+        <LabelForm text="* Pays :"></LabelForm>
         <InputForm
           type="text"
           name="country"
           onChange={(e) => setCountry(e.target.value)}
+          required="required"
         ></InputForm>
-        <LabelForm text="URL de la photo"></LabelForm>
+        <LabelForm text="URL de la photo :"></LabelForm>
         <InputForm
           type="url"
           name="pictureURL"
@@ -126,4 +130,3 @@ function AddUser() {
 }
 
 export default withAdmin(AddUser);
-// export default AddUser;
