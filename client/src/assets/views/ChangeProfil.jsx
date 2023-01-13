@@ -70,19 +70,7 @@ const ChangeProfil = () => {
       console.log(data);
     });
 
-    console.log(
-      "Enter modify",
-      userGender,
-      userCategory,
-      userFirstName,
-      userName,
-      userEmail,
-      userPhoneNumber,
-      userBirthDate,
-      userCity,
-      userCountry,
-      userPictureURL
-    );
+    window.location.href = '/home'
   };
 
   return (

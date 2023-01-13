@@ -54,11 +54,14 @@ const Home = () => {
     ];
 
     const birthDate = new Date(dateString);
+    
   };
 
   return (
     <>
+
       <h2>Bienvenue {user.firstname} sur Intranet</h2>
+      <p className="user-photo"><img src={user.photo} alt={user.name}></img></p>
 
       {randomUser && (
         <>

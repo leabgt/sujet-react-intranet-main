@@ -1,5 +1,4 @@
-import { useEffect, useReducer } from "react";
-import { useState } from "react";
+import { useEffect, useState} from "react";
 
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
@@ -30,6 +29,17 @@ const Liste = () => {
           data.lastname.toLowerCase().includes(q.toLowerCase())
       );
   }
+
+  const getAge = (dateString) => {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -81,8 +91,7 @@ const Liste = () => {
               <div key={keys}>
                 <img src={data.photo} alt={data.firstname}></img>
                 <h3>
-                  {" "}
-                  {data.firstname} {data.lastname} ({data.age}ans){" "}
+                  {data.firstname} {data.lastname} {getAge(data.birthdate)} 
                 </h3>
                 <p>{data.service}</p>
                 <p>
