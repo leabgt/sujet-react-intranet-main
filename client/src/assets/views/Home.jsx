@@ -1,9 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { FaBirthdayCake } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
+import { FaPhone } from "react-icons/fa";
+import "./style.css";
+
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
-import { Navigate } from "react-router-dom";
+
 
 const Home = () => {
   const user = Storage.getJSON("user");
@@ -21,40 +26,72 @@ const Home = () => {
     });
   }
 
-  const logout = () => {
-    Storage.remove("token");
-    Storage.remove("user");
-    window.location.href = "/connexion";
+  const getAge = (dateString) => {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
   };
 
-  const profil = () => {
-    console.log(user.id);
-    let val = user.id;
-    window.location.href = `/profil/`+val;
-  };
+  const getBday = (dateString) => {
+    const monthNames = [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Auot",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Decembre",
+    ];
 
+    const birthDate = new Date(dateString);
+  };
 
   return (
     <>
-      <p onClick={logout}>Logout</p>
-
       <h2>Bienvenue {user.firstname} sur Intranet</h2>
-      <img src={user.photo} alt={user.name} onClick={profil}></img>
 
       {randomUser && (
         <>
           <h3>Avez vous dit bonjour à : </h3>
-          <div>
-            <img src={randomUser.photo} alt={randomUser.firstname}></img>
-            <p>
-              {randomUser.firstname} {randomUser.lastname} ({randomUser.age}{" "}
-              ans)
-            </p>
-            <p>{randomUser.email}</p>
-            <p>{randomUser.phone}</p>
-            <p>Anniversaire : {randomUser.birthdate}</p>
+          <div className="random-user">
+            <div className="random-img">
+              <img src={randomUser.photo} alt={randomUser.firstname}></img>
+            </div>
+            <div className="random-info">
+              <p>
+                {randomUser.firstname} {randomUser.lastname} ({" "}
+                {getAge(randomUser.birthdate)} ans)
+              </p>
+              <p className="random-service">{randomUser.service}</p>
+              <p>
+                {randomUser.city} {randomUser.country}
+              </p>
+              <p>
+                <FaEnvelope />{" "}
+                <a href="mailto:{randomUser.email}">{randomUser.email}</a>
+              </p>
+              <p>
+                <FaPhone />{" "}
+                <a href="tel:{randomUser.phone}">{randomUser.phone}</a>
+              </p>
+              <p>
+                <FaBirthdayCake /> Anniversaire : {randomUser.birthdate}
+              </p>
+            </div>
           </div>
-          <button onClick={fetchRandomCollaborator}>Choisir qqn d'autre</button>
+          <button onClick={fetchRandomCollaborator}>
+            DIRE BONJOUR À QUELQU'UN D'AUTRE
+          </button>
         </>
       )}
     </>
@@ -62,3 +99,4 @@ const Home = () => {
 };
 
 export default Home;
+

@@ -1,7 +1,6 @@
 export const InputForm = (props) => {
   return (
     <>
-      <div>
         <label htmlFor={props.for}>{props.text}</label>
         <input
           onChange={props.onChange}
@@ -14,7 +13,6 @@ export const InputForm = (props) => {
           value={props.value}
           required={props.required}
         />
-      </div>
     </>
   );
 };

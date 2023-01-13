@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Form } from "../components/forms/form";
-import { InputForm } from "../components/forms/InputForm";
 import { LabelForm } from "../components/forms/LabelForm";
+import "./style.css";
 
 import * as API from "../services/apiService";
 import * as Storage from "../services/storageService";
@@ -30,7 +29,7 @@ const Login = () => {
     <>
       <form onSubmit={handleSubmit}>
         <h1>CONNEXION</h1>
-        <LabelForm>Email</LabelForm>
+        <LabelForm text="Email : "></LabelForm>
         <div>
           <input
             type="email"
@@ -41,7 +40,7 @@ const Login = () => {
           ></input>
         </div>
 
-        <LabelForm name="password">Password</LabelForm>
+        <LabelForm text="Password : "></LabelForm>
         <div>
           <input
             type="password"
