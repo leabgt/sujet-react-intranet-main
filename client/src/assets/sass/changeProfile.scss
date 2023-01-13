@@ -15,10 +15,6 @@
   margin-top: 10px;
 }
 
-.input-change-profil label {
-  text-align: right;
-}
-
 .input-change-profil input {
   width: 60%;
   padding: 0;
@@ -39,4 +35,8 @@
   border: none;
   color: white;
   font-weight: 600;
+}
+
+.input-change-profil label {
+  font-size: 14px;
 }

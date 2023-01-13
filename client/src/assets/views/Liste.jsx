@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
@@ -22,7 +22,7 @@ const Liste = () => {
       return collaborator;
     }
     return collaborator
-      .filter((data) => category === undefined || data.service === category )
+      .filter((data) => category === undefined || data.service === category)
       .filter(
         (data) =>
           !q ||
@@ -66,52 +66,58 @@ const Liste = () => {
 
   return (
     <>
-      <h2>Liste des collaborateurs</h2>
-      <div>
-        <div>Filter by Category:</div>
+      <div className="liste-content">
+        <h2>Liste des collaborateurs</h2>
         <div>
-          <input
-            type="search"
-            name="search-bar"
-            onChange={handleQueryChange}
-          ></input>
+          <div>Filter by Category:</div>
+          <div>
+            <input
+              type="search"
+              name="search-bar"
+              onChange={handleQueryChange}
+            ></input>
+          </div>
+          <div>
+            <select name="category-list" onChange={handleCategoryChange}>
+              <option value="All">All</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Technique">Technique</option>
+              <option value="Client">Client</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <select name="category-list" onChange={handleCategoryChange}>
-            <option value="All">All</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Technique">Technique</option>
-            <option value="Client">Client</option>
-          </select>
-        </div>
+        {collaborator && (
+          <div className="liste-cards">
+            {filteredList.map(function (data, keys) {
+              return (
+                <div key={keys} className="liste-card">
+                  <div className="photo-card">
+                    <img src={data.photo} alt={data.firstname}></img>
+                  </div>
+                  <div className="content-card">
+                    <p className="service-content">{data.service}</p>
+                    <h3>
+                      {data.firstname} {data.lastname} {getAge(data.birthdate)}
+                    </h3>
+                    <p>
+                      {data.city} {data.country}
+                    </p>
+                    <p>{data.email}</p>
+                    <p>{data.phone}</p>
+                    <p>Anniversaire {data.birthdate}</p>
+                    {user.isAdmin && (
+                      <button onClick={(e) => handleDeleteUser(e, data.id)}>
+                        Supprimer
+                      </button>
+                    )}
+                    {user.isAdmin && <button>Modifier</button>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
-      {collaborator && (
-        <div>
-          {filteredList.map(function (data, keys) {
-            return (
-              <div key={keys}>
-                <img src={data.photo} alt={data.firstname}></img>
-                <h3>
-                  {data.firstname} {data.lastname} {getAge(data.birthdate)} 
-                </h3>
-                <p>{data.service}</p>
-                <p>
-                  {data.city} {data.country}
-                </p>
-                <p>{data.email}</p>
-                <p>{data.phone}</p>
-                <p>Anniversaire {data.birthdate}</p>
-                {user.isAdmin && (
-                  <button onClick={(e) => handleDeleteUser(e, data.id)}>
-                    Supprimer
-                  </button>
-                )}
-                {user.isAdmin && <button>Modifier</button>}
-              </div>
-            );
-          })}
-        </div>
-      )}
     </>
   );
 };
