@@ -9,7 +9,6 @@ import "./style.css";
 import * as Storage from "../services/storageService";
 import * as API from "../services/apiService";
 
-
 const Home = () => {
   const user = Storage.getJSON("user");
   const token = Storage.get("token");
@@ -99,4 +98,3 @@ const Home = () => {
 };
 
 export default Home;
-
