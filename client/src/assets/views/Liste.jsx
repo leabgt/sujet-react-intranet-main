@@ -22,9 +22,10 @@ const Liste = () => {
       return collaborator;
     }
     return collaborator
-      .filter((data) => category === undefined || data.service === category)
+      .filter((data) => category === undefined || data.service === category )
       .filter(
         (data) =>
+          !q ||
           data.firstname.toLowerCase().includes(q.toLowerCase()) ||
           data.lastname.toLowerCase().includes(q.toLowerCase())
       );

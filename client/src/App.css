@@ -1,9 +1,13 @@
 @import url("/src/assets/sass/addUser.scss");
 @import url("/src/assets/sass/changeProfile.scss");
+@import url("/src/assets/sass/liste.scss");
+@import url("/src/assets/sass/navBar.scss");
+
 #root {
   max-width: 1280px;
+  /* min-width: 1000px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   /* text-align: center; */
 }
 

@@ -4,13 +4,14 @@
 }
 
 .change-profil-form {
+  margin: 0 auto;
   margin-top: 40px;
+  width: 80%;
 }
 
 .input-change-profil {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 20px;
+  display: flex;
+  justify-content: space-between;
   margin-top: 10px;
 }
 
@@ -19,13 +20,13 @@
 }
 
 .input-change-profil input {
-  width: 80%;
+  width: 60%;
   padding: 0;
   border: solid 1px rgb(208, 208, 208);
 }
 
 .input-change-profil select {
-  width: 80%;
+  width: 60%;
   padding: 0;
   border: solid 1px rgb(208, 208, 208);
 }

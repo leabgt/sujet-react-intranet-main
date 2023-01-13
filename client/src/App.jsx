@@ -33,24 +33,32 @@ function App() {
 
   return (
     <BrowserRouter>
-
       <nav>
-        <NavLink> <FaNetworkWired /> Intranet </NavLink>
-        <NavLink to={"/home"}>Home</NavLink>
-        <NavLink to={"/liste"}> <FaList /> Liste </NavLink>
-        <NavLink to={"/profil/:id"}>Profil
-          {/* <img
+        <div className="navbar">
+          <NavLink>
+            {" "}
+            <FaNetworkWired /> Intranet{" "}
+          </NavLink>
+          <NavLink to={"/home"}>Home</NavLink>
+          <NavLink to={"/liste"}>
+            {" "}
+            <FaList /> Liste{" "}
+          </NavLink>
+          <NavLink to={"/profil/:id"}>
+            Profil
+            {/* <img
             src={user.photo}
             alt={user.name}
             className="img-modify"
           ></img> */}
-        </NavLink>
-        <NavLink to={"/"}>
-          <FaSignOutAlt /> Deconnexion
-        </NavLink>
-        <NavLink to={"/adduser"}>Ajouter</NavLink>
+          </NavLink>
+          <NavLink to={"/"}>
+            <FaSignOutAlt /> Deconnexion
+          </NavLink>
+          {user.isAdmin && <NavLink to={"/adduser"}>Ajouter</NavLink>}
+        </div>
       </nav>
-      
+
       <Routes>
         <Route path={"/"} element={<Login />} />
         <Route path={"/home"} element={<Home />} />
@@ -63,4 +71,3 @@ function App() {
 }
 
 export default App;
-
