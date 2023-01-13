@@ -89,7 +89,7 @@ const Home = () => {
               </p>
             </div>
           </div>
-          <button onClick={fetchRandomCollaborator}>
+          <button onClick={fetchRandomCollaborator} className="buttons">
             DIRE BONJOUR À QUELQU'UN D'AUTRE
           </button>
         </>

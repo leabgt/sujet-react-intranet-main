@@ -27,10 +27,10 @@ const Login = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-login">
         <h1>CONNEXION</h1>
-        <LabelForm text="Email : "></LabelForm>
-        <div>
+        <div className="login-email">
+          <LabelForm text="Email : "></LabelForm>
           <input
             type="email"
             name="email"
@@ -39,9 +39,9 @@ const Login = () => {
             required
           ></input>
         </div>
+        <div className="login-password">
+          <LabelForm text="Password : "></LabelForm>
 
-        <LabelForm text="Password : "></LabelForm>
-        <div>
           <input
             type="password"
             name="password"
@@ -51,10 +51,11 @@ const Login = () => {
           ></input>
         </div>
 
-        <button type="submit">CONNEXION</button>
+        <button type="submit" className="buttons">CONNEXION</button>
       </form>
     </>
   );
 };
 
 export default Login;
+

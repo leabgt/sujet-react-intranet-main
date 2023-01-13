@@ -1,12 +1,19 @@
+h2, h3{
+    text-align: center;
+}
+
 .form-login{
     text-align: center;
 }
 
-button{
+.buttons{
     background-color: #ED4671;
     color: white;
     margin: 2em;
     padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
 }
 
 .login-email, 
@@ -14,6 +21,11 @@ button{
     padding: 20px;
 }
 
+nav{
+    display: inline;
+    margin : 10px;
+    font-size: 18px; 
+}
 
 ul{
     list-style-type: none;
