@@ -50,81 +50,118 @@ function AddUser() {
 
   return (
     <>
-      <h1>Ajouter un utilisateur</h1>
-      <Form onSubmit={(e) => handleAddUser(e)} value="Ajouter">
-        <LabelForm text="* Civilité :"></LabelForm>
-        <SelectForm
-          onChange={(e) => setGender(e.target.value)}
-          options={genderoptions}
-        ></SelectForm>
-        <LabelForm text="* Categorie :"></LabelForm>
-        <SelectForm
-          onChange={(e) => setService(e.target.value)}
-          options={serviceoptions}
-        ></SelectForm>
-        <LabelForm text="* Nom :"></LabelForm>
-        <InputForm
-          type="text"
-          name="name"
-          onChange={(e) => setLastName(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Prénom :"></LabelForm>
-        <InputForm
-          type="text"
-          name="firstname"
-          onChange={(e) => setFirstName(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Email :"></LabelForm>
-        <InputForm
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Mot de passe :"></LabelForm>
-        <InputForm
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Téléphone :"></LabelForm>
-        <InputForm
-          type="tel"
-          name="phonenumber"
-          onChange={(e) => setPhone(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Date de naissance :"></LabelForm>
-        <InputForm
-          type="text"
-          name="birthdate"
-          onChange={(e) => setBirthDate(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Ville :"></LabelForm>
-        <InputForm
-          type="text"
-          name="city"
-          onChange={(e) => setCity(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="* Pays :"></LabelForm>
-        <InputForm
-          type="text"
-          name="country"
-          onChange={(e) => setCountry(e.target.value)}
-          required="required"
-        ></InputForm>
-        <LabelForm text="URL de la photo :"></LabelForm>
-        <InputForm
-          type="url"
-          name="pictureURL"
-          onChange={(e) => setPhoto(e.target.value)}
-        ></InputForm>
-      </Form>
+      <div className="add-user-content">
+        <div className="add-user-title">
+          <h1>Créer un utilisateur</h1>
+        </div>
+        <Form
+          onSubmit={(e) => handleAddUser(e)}
+          value="AJOUTER"
+          className="add-user-form"
+        >
+          <div className="input-add-user">
+            <LabelForm text="* Civilité : "></LabelForm>
+            <SelectForm
+              onChange={(e) => setGender(e.target.value)}
+              options={genderoptions}
+            ></SelectForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Categorie :"></LabelForm>
+            <SelectForm
+              onChange={(e) => setService(e.target.value)}
+              options={serviceoptions}
+            ></SelectForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Nom :"></LabelForm>
+            <InputForm
+              type="text"
+              name="name"
+              placeholder="SMITH"
+              onChange={(e) => setLastName(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Prénom :"></LabelForm>
+            <InputForm
+              type="text"
+              name="firstname"
+              placeholder="John"
+              onChange={(e) => setFirstName(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Email :"></LabelForm>
+            <InputForm
+              type="email"
+              name="email"
+              placeholder="john.smith@email.com"
+              onChange={(e) => setEmail(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Mot de passe :"></LabelForm>
+            <InputForm
+              type="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Téléphone :"></LabelForm>
+            <InputForm
+              type="tel"
+              name="phonenumber"
+              placeholder="07.89.01.23.45"
+              onChange={(e) => setPhone(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Date de naissance :"></LabelForm>
+            <InputForm
+              type="text"
+              name="birthdate"
+              onChange={(e) => setBirthDate(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Ville :"></LabelForm>
+            <InputForm
+              type="text"
+              name="city"
+              placeholder="Paris"
+              onChange={(e) => setCity(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="* Pays :"></LabelForm>
+            <InputForm
+              type="text"
+              name="country"
+              placeholder="France"
+              onChange={(e) => setCountry(e.target.value)}
+              required="required"
+            ></InputForm>
+          </div>
+          <div className="input-add-user">
+            <LabelForm text="URL de la photo :"></LabelForm>
+            <InputForm
+              type="url"
+              name="pictureURL"
+              placeholder="htps://"
+              onChange={(e) => setPhoto(e.target.value)}
+            ></InputForm>
+          </div>
+        </Form>
+      </div>
     </>
   );
 }

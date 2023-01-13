@@ -14,7 +14,7 @@ import { useEffect } from "react";
 // import { useState } from "react";
 
 const ChangeProfil = () => {
-  const user = Storage.getJSON("user")
+  const user = Storage.getJSON("user");
   const token = Storage.get("token");
   const id = user.id;
 
@@ -35,8 +35,7 @@ const ChangeProfil = () => {
   const [userCountry, setUserCountry] = useState("");
   const [userPictureURL, setUserPictureURL] = useState("");
 
-
-  useEffect(() =>{
+  useEffect(() => {
     setUserGender(user.gender);
     setUserCategory(user.service);
     setUserName(user.lastname);
@@ -48,26 +47,28 @@ const ChangeProfil = () => {
     setUserCity(user.city);
     setUserCountry(user.country);
     setUserPictureURL(user.photo);
-  }, [])
+  }, []);
 
-  const handleModifyUser = (e , id) => {
+  const handleModifyUser = (e, id) => {
     e.preventDefault();
 
     API.updateUser(
       token,
-      id, 
-      userGender, 
-      userFirstName, 
+      id,
+      userGender,
+      userFirstName,
       userName,
-      userPassword, 
-      userEmail, 
+      userPassword,
+      userEmail,
       userPhoneNumber,
-      userBirthDate, 
-      userCity, 
-      userCountry, 
+      userBirthDate,
+      userCity,
+      userCountry,
       userPictureURL,
-      userCategory )
-      .then((data) => {console.log(data);})
+      userCategory
+    ).then((data) => {
+      console.log(data);
+    });
 
     console.log(
       "Enter modify",
@@ -81,85 +82,126 @@ const ChangeProfil = () => {
       userCity,
       userCountry,
       userPictureURL
-      );
+    );
   };
 
   return (
     <>
-      <h1>Modifier mon profil</h1>
-      <Form onSubmit={(e) => handleModifyUser(e, id)} value="Modifier">
-        <SelectForm
-          onChange={(e) => setUserGender(e.target.value)}
-          defaultValue={user.gender}
-          options={genderoptions}
-        ></SelectForm>
-        <LabelForm text="Categorie"></LabelForm>
-        <SelectForm
-          onChange={(e) => setUserCategory(e.target.value)}
-          defaultValue={user.service}
-          options={serviceoptions}
-        ></SelectForm>
-        <LabelForm text="Nom"></LabelForm>
-        <InputForm
-          type="text"
-          name="name"
-          onChange={(e) => setUserName(e.target.value)}
-          defaultValue={user.lastname}
-        ></InputForm>
-        <LabelForm text="Prénom"></LabelForm>
-        <InputForm
-          name="firstname"
-          onChange={(e) => setUserFirstName(e.target.value)}
-         defaultValue={user.firstname}
-        ></InputForm>
-        <LabelForm text="Email"></LabelForm>
-        <InputForm
-          type="email"
-          name="email"
-          onChange={(e) => setUserEmail(e.target.value)}
-          defaultValue={user.email}
-        ></InputForm>
-        <LabelForm text="Mot de passe"></LabelForm>
-        <InputForm
-          type="password"
-          name="password"
-          onChange={(e) => setUserPassword(e.target.value)}
-        ></InputForm>
-        <LabelForm text="Numéro de téléphone"></LabelForm>
-        <InputForm
-          name="phonenumber"
-          onChange={(e) => setUserPhoneNumber(e.target.value)}
-          defaultValue={user.phone}
-        ></InputForm>
-        <LabelForm text="Date de naissance"></LabelForm>
-        <InputForm
-          name="birthdate"
-          onChange={(e) => setUserBirthDate(e.target.value)}
-          defaultValue={user.birthdate}
-        ></InputForm>
-        <LabelForm text="Ville"></LabelForm>
-        <InputForm
-          name="password"
-          onChange={(e) => setUserCity(e.target.value)}
-          defaultValue={user.city}
-        ></InputForm>
-        <LabelForm text="Pays"></LabelForm>
-        <InputForm
-          name="country"
-          onChange={(e) => setUserCountry(e.target.value)}
-          defaultValue={user.country}
-        ></InputForm>
-        <LabelForm text="URL de la photo"></LabelForm>
-        <InputForm
-          name="pictureURL"
-          onChange={(e) => setUserPictureURL(e.target.value)}
-          defaultValue={user.photo}
-        ></InputForm>
-      </Form>
+      <div className="change-profil-content">
+        <div className="change-profil-title">
+          <h1>Modifier mon profil</h1>
+        </div>
+
+        <Form
+          onSubmit={(e) => handleModifyUser(e, id)}
+          value="MODIFIER"
+          className="change-profil-form"
+        >
+          <div className="input-change-profil">
+            <LabelForm text="Civilité"></LabelForm>
+            <SelectForm
+              onChange={(e) => setUserGender(e.target.value)}
+              defaultValue={user.gender}
+              options={genderoptions}
+            ></SelectForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Categorie"></LabelForm>
+            <SelectForm
+              onChange={(e) => setUserCategory(e.target.value)}
+              defaultValue={user.service}
+              options={serviceoptions}
+            ></SelectForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Nom"></LabelForm>
+            <InputForm
+              type="text"
+              name="name"
+              onChange={(e) => setUserName(e.target.value)}
+              defaultValue={user.lastname}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Prénom"></LabelForm>
+            <InputForm
+              name="firstname"
+              onChange={(e) => setUserFirstName(e.target.value)}
+              defaultValue={user.firstname}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Email"></LabelForm>
+            <InputForm
+              type="email"
+              name="email"
+              onChange={(e) => setUserEmail(e.target.value)}
+              defaultValue={user.email}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Mot de passe"></LabelForm>
+            <InputForm
+              type="password"
+              name="password"
+              onChange={(e) => setUserPassword(e.target.value)}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Numéro de téléphone"></LabelForm>
+            <InputForm
+              name="phonenumber"
+              onChange={(e) => setUserPhoneNumber(e.target.value)}
+              defaultValue={user.phone}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Date de naissance"></LabelForm>
+            <InputForm
+              name="birthdate"
+              onChange={(e) => setUserBirthDate(e.target.value)}
+              defaultValue={user.birthdate}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Ville"></LabelForm>
+            <InputForm
+              name="password"
+              onChange={(e) => setUserCity(e.target.value)}
+              defaultValue={user.city}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="Pays"></LabelForm>
+            <InputForm
+              name="country"
+              onChange={(e) => setUserCountry(e.target.value)}
+              defaultValue={user.country}
+            ></InputForm>
+          </div>
+
+          <div className="input-change-profil">
+            <LabelForm text="URL de la photo"></LabelForm>
+            <InputForm
+              name="pictureURL"
+              onChange={(e) => setUserPictureURL(e.target.value)}
+              defaultValue={user.photo}
+            ></InputForm>
+          </div>
+        </Form>
+      </div>
     </>
   );
 };
 
 //export default withAuth(ChangeProfil);
 export default ChangeProfil;
-

@@ -96,6 +96,7 @@ const Liste = () => {
                     Supprimer
                   </button>
                 )}
+                {user.isAdmin && <button>Modifier</button>}
               </div>
             );
           })}

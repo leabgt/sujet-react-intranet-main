@@ -6,7 +6,7 @@ export const Form = (props) => {
 
   return (
     <>
-      <form onSubmit={props.onSubmit}>
+      <form onSubmit={props.onSubmit} className={props.className}>
         {props.children}
         <input type="submit" value={props.value} />
       </form>

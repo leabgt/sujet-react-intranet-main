@@ -1,0 +1,41 @@
+.change-profil-title {
+  border-bottom: solid 1px rgb(208, 208, 208);
+  text-align: center;
+}
+
+.change-profil-form {
+  margin-top: 40px;
+}
+
+.input-change-profil {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.input-change-profil label {
+  text-align: right;
+}
+
+.input-change-profil input {
+  width: 80%;
+  padding: 0;
+  border: solid 1px rgb(208, 208, 208);
+}
+
+.input-change-profil select {
+  width: 80%;
+  padding: 0;
+  border: solid 1px rgb(208, 208, 208);
+}
+
+.change-profil-form input[type="submit" i] {
+  background: linear-gradient(#f87070, #ec4785);
+  padding: 10px 20px;
+  margin: 0 50%;
+  margin-top: 30px;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
